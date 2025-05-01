@@ -103,7 +103,7 @@ export function triggerSplash(
     particle.position.copy(position);
     
     // Calculate direction with mug rotation influence
-    let splashDirection = new THREE.Vector3();
+    const splashDirection = new THREE.Vector3();
     if (direction) {
       splashDirection.copy(direction);
       if (mugRotation) {

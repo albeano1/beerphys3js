@@ -471,14 +471,7 @@ function handleCollision(event?: {
   }
 
   // Animate liquid level drop realistically
-  const liquidReduction = collisionIntensity * 0.25;
-  const newLeftLevel = Math.max(0.3, leftGlass.liquidLevel - liquidReduction);
-  const newRightLevel = Math.max(0.3, rightGlass.liquidLevel - liquidReduction);
 
-  // Easing function for smooth animation
-  function easeOutQuad(t: number) {
-    return t * (2 - t);
-  }
 
   // Create bubble effects
   const createBubbles = (glass: any) => {

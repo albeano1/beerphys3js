@@ -480,40 +480,6 @@ function handleCollision(event?: {
     return t * (2 - t);
   }
 
-  // Animate liquid and foam together
-  const animateLiquidAndFoam = (glass: any, targetLevel: number) => {
-    const startTime = Date.now();
-    const duration = 1200; // ms
-    const startLevel = glass.liquidLevel;
-
-
-    const update = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easeOutQuad(progress);
-      
-      // Update liquid level
-      glass.liquidLevel = startLevel + (targetLevel - startLevel) * easedProgress;
-      
-      // Update foam position to match liquid surface
-      if (glass.foamMesh) {
-        const targetFoamHeight = glass.liquidLevel * glass.glassHeight;
-        glass.foamMesh.position.y = targetFoamHeight;
-        
-        // Add slight bobbing motion
-        glass.foamMesh.position.y += Math.sin(Date.now() * 0.008) * 0.15;
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      }
-    };
-    update();
-  };
-
-  animateLiquidAndFoam(leftGlass, newLeftLevel);
-  animateLiquidAndFoam(rightGlass, newRightLevel);
-
   // Create bubble effects
   const createBubbles = (glass: any) => {
     if (!glass.foamMesh) return;
@@ -549,7 +515,7 @@ function handleCollision(event?: {
         const riseSpeed = 0.3 + Math.random() * 0.4;
         const spinSpeed = (Math.random() - 0.5) * 0.02;
         const startTime = Date.now();
-        const duration = 2000 + Math.random() * 1000;
+        const duration: number = 2000 + Math.random() * 1000;
 
         const animateBubble = () => {
           const elapsed = Date.now() - startTime;

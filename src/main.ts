@@ -632,7 +632,7 @@ function handleCollision(event?: {
 
   // Play collision sound if available
   try {
-    const clinkSound = new Audio('./assets/clink.mp3');
+    const clinkSound = new Audio('./textures/clink.mp3');
     clinkSound.volume = Math.min(collisionIntensity * 0.7, 1);
     clinkSound.play().catch(e => console.log("Audio error:", e));
   } catch (e) {

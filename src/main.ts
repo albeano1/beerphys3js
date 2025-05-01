@@ -408,7 +408,7 @@ function handleCollision(event?: {
 
   // Calculate collision intensity
   let collisionIntensity = 1.0;
-  let contactPoint = new THREE.Vector3(
+  const contactPoint = new THREE.Vector3(
     (leftGlass.object.position.x + rightGlass.object.position.x) / 2,
     (leftGlass.object.position.y + rightGlass.object.position.y) / 2 + 15,
     (leftGlass.object.position.z + rightGlass.object.position.z) / 2

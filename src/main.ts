@@ -470,69 +470,6 @@ function handleCollision(event?: {
     );
   }
 
-  // Animate liquid level drop realistically
-
-
-  // Create bubble effects
-  const createBubbles = (glass: any) => {
-    if (!glass.foamMesh) return;
-    
-    const bubbleCount = Math.floor(collisionIntensity * 30);
-    const glassWidth = 8;
-    const glassDepth = 8;
-
-    for (let i = 0; i < bubbleCount; i++) {
-      setTimeout(() => {
-        const size = 0.2 + Math.random() * 0.4;
-        const bubble = new THREE.Mesh(
-          new THREE.SphereGeometry(size, 8, 8),
-          new THREE.MeshPhongMaterial({ 
-            color: 0xffffff,
-            transparent: true,
-            opacity: 0.8,
-            specular: 0x111111,
-            shininess: 30
-          })
-        );
-
-        // Position at random point in liquid
-        bubble.position.set(
-          (Math.random() - 0.5) * glassWidth * 0.8,
-          (glass.liquidLevel - 0.1) * glass.glassHeight,
-          (Math.random() - 0.5) * glassDepth * 0.8
-        );
-
-        glass.object.add(bubble);
-
-        // Animate bubble rising
-        const riseSpeed = 0.3 + Math.random() * 0.4;
-        const spinSpeed = (Math.random() - 0.5) * 0.02;
-        const startTime = Date.now();
-        const duration: number = 2000 + Math.random() * 1000;
-
-        const animateBubble = () => {
-          const elapsed = Date.now() - startTime;
-          if (elapsed > duration) {
-            glass.object.remove(bubble);
-            return;
-          }
-
-          const progress = elapsed / duration;
-          bubble.position.y += riseSpeed * 0.1;
-          bubble.rotation.y += spinSpeed;
-          bubble.scale.multiplyScalar(1.002);
-          bubble.material.opacity = 0.8 * (1 - progress);
-
-          requestAnimationFrame(animateBubble);
-        };
-        animateBubble();
-      }, Math.random() * 800);
-    }
-  };
-
-  createBubbles(leftGlass);
-  createBubbles(rightGlass);
-
   // ==================== GLASS PHYSICS ====================
   // Calculate rebound forces
   const separationSpeed = currentSpeed * 2.5 * collisionIntensity;

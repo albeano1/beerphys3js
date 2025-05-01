@@ -34,7 +34,7 @@ export default function createBeer(scene: THREE.Scene, world: CANNON.World): Bee
   const beerGroup = new THREE.Group();
   const glassHeight = 30;
   const beerHeight = 25;
-  const glassThickness = 0.5;
+
   
   // Texture loader with error handling
   const textureLoader = new THREE.TextureLoader();
@@ -147,9 +147,7 @@ export default function createBeer(scene: THREE.Scene, world: CANNON.World): Bee
   mugBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
   world.addBody(mugBody);
 
-  // Initialize arrays
-  const activeParticles: THREE.Mesh[] = [];
-  const foamBubbles: THREE.Mesh[] = [];
+
 
   // Assemble the mug
   beerGroup.add(outerGlass, innerGlass, handle, beer, foam);

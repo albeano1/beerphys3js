@@ -423,11 +423,7 @@ function handleCollision(event?: {
     contactPoint.set(worldPoint.x, worldPoint.y, worldPoint.z);
   }
 
-  // Calculate collision direction
-  const collisionDirection = new THREE.Vector3().subVectors(
-    rightGlass.object.position,
-    leftGlass.object.position
-  ).normalize();
+
 
   // ==================== LIQUID PHYSICS ====================
   // Create realistic liquid splash particles
@@ -489,7 +485,7 @@ function handleCollision(event?: {
     const startTime = Date.now();
     const duration = 1200; // ms
     const startLevel = glass.liquidLevel;
-    const startFoamHeight = glass.foamMesh?.position.y || 0;
+
 
     const update = () => {
       const elapsed = Date.now() - startTime;
